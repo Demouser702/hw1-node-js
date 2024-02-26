@@ -39,7 +39,7 @@ app.get("/test", (req, res) => {
 });
 
 // Define routes and route handlers
-app.get("/items", authMiddleware, (req, res) => {
+app.get("/items", loggerMiddleware, authMiddleware, (req, res) => {
   res.send("Hello Items");
 });
 

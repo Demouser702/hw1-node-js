@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const PORT = 3000;
 
 // app.get("/api/users", (req, res) => {
 //   const userId = req.query.id;
@@ -31,31 +30,35 @@ app.get("/api/location/:city/users/:id", (req, res) => {
 });
 
 app.get("/api/users/create", (req, res) => {
-  const options = {
-    root: path.join(__dirname),
-  };
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formular</title>
+  </head>
+  <body>
+    <form method="post" action="http://localhost:3000/api/users/create">
+      <label>
+        <input type="text" name="username" placeholder="Introdu numele" />
+      </label>
 
-  const fileName = "form.html";
-  res.sendFile(fileName, options, function (err) {
-    if (err) {
-      console.error("Error sending file:", err);
-    } else {
-      console.log("Sent:", fileName);
-    }
-  });
+      <label>
+        <input type="password" name="password" placeholder="Introdu parola" />
+      </label>
+
+      <button type="submit">Trimite</button>
+    </form>
+  </body>
+</html>
+`);
+  res.send(`User ID: ${userId}`);
 });
-app.use(express.json());
 app.post("/api/users/create", (req, res) => {
-  console.dir(req.body);
-  // const { username, email } = req.body;
-  // res.send(`Username: ${username}, Email: ${email}`);
-  res.send("User has been created.");
+  const { username, email } = req.body;
+  res.send(`Username: ${username}, Email: ${email}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(8080, () => {
+  console.log("Server is running on port 8080");
 });
-// app.listen(PORT, function (err) {
-//   if (err) console.error(err);
-//   console.log("Server listening on PORT", PORT);
-// });

@@ -1,16 +1,20 @@
 const express = require("express");
 const morgan = require("morgan");
-
 const app = express();
-app.use(morgan("dev"));
 
-app.get("./", (req, res) => {
-  res.send("Am trimis date de la server spre clien");
+// Use Morgan middleware for logging HTTP requests
+app.use(morgan("combined")); // sau dev
+
+app.get("/", (req, res) => {
+  res.send("Am trimis date de la server spre client");
 });
-app.get("./test", (req, res) => {
+
+app.get("/test", (req, res) => {
   res.send("Am trimis test");
 });
-const PORT = process.env.PORT || 8080;
+
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

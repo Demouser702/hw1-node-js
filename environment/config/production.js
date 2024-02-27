@@ -1,2 +1,0 @@
-API_KEY = "PRODUCTION_API";
-API_URL = "";

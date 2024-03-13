@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
 const dotenv = require("dotenv");
+const { STANDARD_ROLE } = require("../constants.js");
 
 dotenv.config();
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // Signup route
-router.post("/signup", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -22,6 +23,7 @@ router.post("/signup", async (req, res) => {
     const newUser = new User({
       username,
       password: hashedPassword,
+      role: STANDARD_ROLE,
     });
 
     await newUser.save();

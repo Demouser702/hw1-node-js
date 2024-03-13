@@ -6,6 +6,7 @@ var logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+const tasksRouter = require("./routes/tasks");
 const { connectToDb } = require("./db");
 
 const app = express();
@@ -21,5 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
+app.use("/tasks", tasksRouter);
 
 module.exports = app;
